@@ -1,3 +1,4 @@
 Flask
 keras-ocr
 numpy
+gunicorn
