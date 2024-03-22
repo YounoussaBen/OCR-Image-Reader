@@ -1,4 +1,5 @@
 Flask
+tensorflow
 keras-ocr
 numpy
 gunicorn
