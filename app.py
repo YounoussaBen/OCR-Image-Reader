@@ -5,7 +5,8 @@ import keras_ocr
 app = Flask(__name__)
 
 # Initialize the keras_ocr pipeline
-pipeline = keras_ocr.pipeline.Pipeline(weights_path="craft_mlt_25k.h5", recognition_model="crnn_kurapan.h5")
+pipeline = keras_ocr.pipeline.Pipeline()
+pipeline.keras_model(weights="craft_mlt_25k.h5", recognition_model="crnn_kurapan.h5")
 
 # Define POST endpoint for text extraction
 @app.route('/extract_text', methods=['POST'])
