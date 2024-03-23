@@ -1,12 +1,20 @@
 from flask import Flask, request, jsonify
 import keras_ocr
+import keras.models
+
 
 # Initialize Flask app
 app = Flask(__name__)
 
-# Initialize the keras_ocr pipeline
-pipeline = keras_ocr.pipeline.Pipeline()
-pipeline.keras_model(weights="craft_mlt_25k.h5", recognition_model="crnn_kurapan.h5")
+
+# Download and load pre-trained weights
+detector_weights_path = "craft_mlt_25k.h5"
+recognizer_weights_path = "crnn_kurapan.h5"
+detector = keras.models.load_model(detector_weights_path)
+recognizer = keras.models.load_model(recognizer_weights_path)
+
+# Create pipeline using loaded models
+pipeline = keras_ocr.pipeline.Pipeline(detector=detector, recognizer=recognizer)
 
 # Define POST endpoint for text extraction
 @app.route('/extract_text', methods=['POST'])
